@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: Inter;
+  src: url('/fonts/Inter.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Hanken;
+  src: url('/fonts/HankenGrotesk.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  --ink: #191c21;
+  --muted: #58606d;
+  --blue: #004288;
+  --blue-2: #07589f;
+  --sky: #eef7ff;
+  --lavender: #f4f5ff;
+  --line: #dfe5ec;
+  --shadow: 0 24px 65px rgba(18, 50, 85, .12);
+}
+
+@layer base {
+  * { @apply box-border; }
+  html { @apply scroll-smooth; }
+  body { @apply m-0 bg-white font-[Inter] text-[var(--ink)]; }
+  a { @apply text-inherit no-underline; }
+  img { @apply max-w-full; }
+  button, input, textarea, select { font: inherit; }
+}
+
+@keyframes testimonial-enter {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
