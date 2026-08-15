@@ -1,6 +1,11 @@
-const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.wesoft.fr";
+const configuredSiteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.wesoft.fr").trim();
 
-export const siteUrl = configuredSiteUrl.replace(/\/$/, "");
+// Hosting dashboards sometimes expose a bare hostname (for example
+// "wesoft.vercel.app"). `new URL()` requires a protocol, so default to HTTPS
+// while still accepting a complete http(s) URL for local development.
+export const siteUrl = (/^https?:\/\//i.test(configuredSiteUrl)
+  ? configuredSiteUrl
+  : `https://${configuredSiteUrl}`).replace(/\/$/, "");
 
 export function absoluteUrl(pathOrUrl = "/") {
   if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
