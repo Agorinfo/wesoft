@@ -10,7 +10,7 @@ export async function generateMetadata({params}: { params: Promise<{ slug: strin
     const page = fallbackPages[slug] ? mergePageWithFallback(cmsPage, fallbackPages[slug]) : cmsPage;
     const title = page?.seo?.metaTitle || page?.title;
     const description = page?.seo?.metaDescription || page?.excerpt;
-    const image = page?.seo?.shareImage?.url ? mediaUrl(page.seo.shareImage.url) : "/opengraph-image.png";
+    const image = page?.seo?.shareImage?.url ? mediaUrl(page.seo.shareImage.url) : `/${slug}/opengraph-image`;
     return {
         title,
         description,

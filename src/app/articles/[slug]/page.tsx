@@ -13,7 +13,7 @@ export async function generateMetadata({params}: { params: Promise<{ slug: strin
     const article = await getArticle(slug);
     const title = article?.seo?.metaTitle || article?.title;
     const description = article?.seo?.metaDescription || article?.excerpt;
-    const image = article?.seo?.shareImage?.url ? mediaUrl(article.seo.shareImage.url) : article?.cover?.url ? mediaUrl(article.cover.url) : "/opengraph-image.png";
+    const image = article?.seo?.shareImage?.url ? mediaUrl(article.seo.shareImage.url) : `/articles/${slug}/opengraph-image`;
     return {
         title,
         description,

@@ -8,7 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const page = await getPage("articles");
   const title = page?.seo?.metaTitle || page?.title || "Ressources";
   const description = page?.seo?.metaDescription || page?.excerpt || "Les actualités et ressources WeSoft.";
-  const image = page?.seo?.shareImage?.url ? mediaUrl(page.seo.shareImage.url) : "/opengraph-image.png";
+  const image = page?.seo?.shareImage?.url ? mediaUrl(page.seo.shareImage.url) : "/articles/opengraph-image";
   return {
     title,
     description,
