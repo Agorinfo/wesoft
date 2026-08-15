@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Calque_2" data-name="Calque 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 201.53 175.52">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #02a1ff;
+      }
+
+      .cls-2 {
+        fill: #0872b4;
+      }
+
+      .cls-2, .cls-3 {
+        isolation: isolate;
+      }
+
+      .cls-4 {
+        fill: #369;
+      }
+
+      .cls-3 {
+        fill: #76d5ff;
+      }
+    </style>
+  </defs>
+  <g id="Calque_1-2" data-name="Calque 1">
+    <g id="Logo">
+      <g>
+        <polygon class="cls-4" points="100.78 87.28 151.17 0 50.39 0 100.78 87.28"/>
+        <polygon class="cls-1" points="151.14 0 201.53 87.28 100.75 87.28 151.14 0"/>
+        <polygon class="cls-2" points="50.39 0 100.78 87.28 0 87.28 50.39 0"/>
+      </g>
+      <polygon class="cls-2" points="151.49 175.52 100.54 87.28 201.53 87.28 151.49 175.52"/>
+      <g>
+        <polygon class="cls-1" points="100.6 87.16 77.22 127.94 53.96 87.39 77.35 46.62 100.6 87.16"/>
+        <polygon class="cls-3" points="100.8 87.15 151.49 175.52 50.69 175.52 0 87.15 100.8 87.15"/>
+        <polygon class="cls-3" points="124.32 46.62 147.57 87.16 100.6 87.16 77.35 46.62 124.32 46.62"/>
+        <polygon class="cls-1" points="147.57 87.16 124.19 127.94 77.22 127.94 100.6 87.16 147.57 87.16"/>
+      </g>
+    </g>
+  </g>
+</svg>
