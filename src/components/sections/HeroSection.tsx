@@ -16,12 +16,14 @@ function HeroTitle({ value }: { value: string }) {
 export function HeroSection({ block }: { block: PageBlock }) {
   const image = block.image as Media | undefined;
   const floatingIcon = block.floatingIcon as CmsIconValue | undefined;
+  const hasTiltedImage = block.imageTilt === true;
+  const hasLargeTiltedImage = hasTiltedImage && text(block.imageTiltSize) === "large";
 
-  return <section id={text(block.anchorId)} className={`overflow-hidden py-20 max-[800px]:py-[65px] ${backgroundClass(block)}`}>
-    <div className={`${CONTENT} grid grid-cols-[604fr_564fr] gap-6 max-[1000px]:grid-cols-2 max-[800px]:grid-cols-1 max-[800px]:gap-[45px]`}>
+  return <section id={text(block.anchorId)} className={`overflow-hidden py-20 max-[800px]:py-[65px] ${hasTiltedImage && !hasLargeTiltedImage ? "py-12 max-[800px]:py-14" : ""} ${backgroundClass(block)}`}>
+    <div className={`${CONTENT} grid grid-cols-[604fr_564fr] gap-6 max-[1000px]:grid-cols-2 max-[800px]:grid-cols-1 max-[800px]:gap-[45px] ${hasTiltedImage && !hasLargeTiltedImage ? "grid-cols-[minmax(0,1fr)_310px] items-center gap-18 max-[1000px]:gap-10 max-[800px]:gap-8" : ""}`}>
       <div className="relative z-[2]">
         {text(block.eyebrow) && <span className="mb-3 block text-xs font-extrabold uppercase tracking-[.08em] text-[var(--blue)]">{text(block.eyebrow)}</span>}
-        <h1 className="m-0 font-[Hanken] text-5xl font-extrabold leading-[1.25] tracking-[-.025em] max-[800px]:text-[38px]">
+        <h1 className={`m-0 font-[Hanken] font-extrabold leading-[1.25] tracking-[-.025em] ${hasTiltedImage ? "text-[34px] max-[800px]:text-[32px]" : "text-5xl max-[800px]:text-[38px]"}`}>
           <HeroTitle value={text(block.title)} />
         </h1>
         <p className="my-6 max-w-[570px] text-lg leading-[1.6] text-[var(--muted)]">{text(block.text)}</p>
@@ -30,14 +32,14 @@ export function HeroSection({ block }: { block: PageBlock }) {
         </div>
       </div>
 
-      {image?.url && <div className="relative z-[1] flex min-h-[386px] w-full max-w-[564px] items-center justify-center max-[800px]:min-h-[360px] max-[600px]:mt-4">
-        <div className="absolute -inset-[10%] rounded-xl bg-[#d7e3ff]/30 blur-[32px]" />
-        <div className="relative h-[358px] w-[528px] shrink-0 max-[800px]:h-80 max-[800px]:w-full">
-          {block.showDecoration !== false && <span className="absolute -right-4 -top-4 z-0 h-24 w-24 rounded-lg bg-[var(--blue)] max-[800px]:-right-2 max-[800px]:-top-3 max-[800px]:h-[78px] max-[800px]:w-[78px]" aria-hidden />}
+      {image?.url && <div className={`relative z-[1] flex w-full items-center justify-center ${hasLargeTiltedImage ? "min-h-[386px] max-w-[564px] max-[800px]:min-h-[360px] max-[600px]:mt-4" : hasTiltedImage ? "min-h-[170px] max-[800px]:min-h-[190px]" : "min-h-[386px] max-w-[564px] max-[800px]:min-h-[360px] max-[600px]:mt-4"}`}>
+        {!hasTiltedImage && <div className="absolute -inset-[10%] rounded-xl bg-[#d7e3ff]/30 blur-[32px]" />}
+        <div className={`relative shrink-0 ${hasLargeTiltedImage ? "h-[358px] w-[528px] rotate-[3deg] max-[800px]:h-80 max-[800px]:w-full" : hasTiltedImage ? "h-[148px] w-[246px] rotate-[3deg] max-[800px]:h-[165px] max-[800px]:w-[275px]" : "h-[358px] w-[528px] max-[800px]:h-80 max-[800px]:w-full"}`}>
+          {!hasTiltedImage && block.showDecoration !== false && <span className="absolute -right-4 -top-4 z-0 h-24 w-24 rounded-lg bg-[var(--blue)] max-[800px]:-right-2 max-[800px]:-top-3 max-[800px]:h-[78px] max-[800px]:w-[78px]" aria-hidden />}
           <div className="relative z-[1] h-full w-full overflow-hidden rounded-lg border-8 border-white shadow-2xl">
             <Image className="object-cover" src={mediaUrl(image.url)} alt={image.alternativeText || ""} fill priority sizes="(max-width: 800px) 100vw, 528px" />
           </div>
-          {text(block.floatingTitle) && <div className="absolute left-[-32px] top-[296px] z-[3] flex h-[90px] w-[264px] items-center gap-4 rounded-lg border border-[var(--line)] bg-white p-6 text-[var(--ink)] shadow-xl max-[1000px]:left-[-16px] max-[800px]:left-3 max-[800px]:top-[274px] max-[800px]:h-[78px] max-[800px]:w-[235px] max-[800px]:p-[18px] max-[600px]:left-2">
+          {text(block.floatingTitle) && !hasTiltedImage && <div className="absolute left-[-32px] top-[296px] z-[3] flex h-[90px] w-[264px] items-center gap-4 rounded-lg border border-[var(--line)] bg-white p-6 text-[var(--ink)] shadow-xl max-[1000px]:left-[-16px] max-[800px]:left-3 max-[800px]:top-[274px] max-[800px]:h-[78px] max-[800px]:w-[235px] max-[800px]:p-[18px] max-[600px]:left-2">
             <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[var(--blue)]">
               {floatingIcon ? <CmsIcon icon={floatingIcon} /> : <ChartNoAxesCombined className="text-white" size={20} />}
             </span>
