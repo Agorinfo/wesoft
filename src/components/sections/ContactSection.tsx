@@ -1,4 +1,5 @@
 import { Building2, ChevronRight, Linkedin, MapPin, Share2 } from "lucide-react";
+import Link from "next/link";
 import { CmsIcon } from "@/components/CmsIcon";
 import { DynamicForm } from "@/components/DynamicForm";
 import { getForm } from "@/lib/strapi";
@@ -51,6 +52,9 @@ export async function ContactSection({ block }: { block: PageBlock }) {
 
   return (
     <section className={`${sectionClass(block)} overflow-hidden`}>
+      <div className={CONTENT}>
+        <nav className="mb-9 flex items-center gap-2 text-xs text-(--muted)" aria-label="Fil d’Ariane"><Link href="/">Accueil</Link><span>›</span><strong className="font-semibold text-(--blue)">Contact</strong></nav>
+      </div>
       <div className={`${CONTENT} grid grid-cols-[minmax(280px,0.78fr)_minmax(0,1.22fr)] items-start gap-8 max-[1000px]:grid-cols-1 max-[1000px]:gap-10`}>
         <aside className="relative grid gap-5">
           <div className="relative overflow-hidden rounded-[14px] bg-[var(--blue)] px-7 py-8 text-white shadow-[0_18px_38px_rgba(0,66,136,.2)] max-[600px]:px-6">

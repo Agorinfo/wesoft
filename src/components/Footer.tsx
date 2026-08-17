@@ -16,10 +16,10 @@ export function Footer({config}: { config: SiteConfig }) {
         "lg:grid-cols-[1.5fr_repeat(6,minmax(0,1fr))]",
     ][columns.length];
     const columnClass = "flex min-w-0 flex-col gap-3 [&_a]:text-sm [&_a]:text-[var(--muted)] [&_a]:hover:text-[var(--blue)]";
-    return <footer className="border-t border-[var(--line)] pb-[30px] pt-20">
-        <div className={`mx-auto grid w-[calc(100%-48px)] max-w-[1192px] grid-cols-1 gap-[38px] sm:grid-cols-2 md:grid-cols-3 ${desktopGrid} max-[800px]:w-[calc(100%-32px)] max-[800px]:max-w-[680px]`}>
-            <div className="col-span-full lg:col-span-1"><Brand config={config}/><p className="mt-6 max-w-[290px] leading-[1.6] text-[var(--muted)]">{config.footerIntro}</p>
-                <div className="mt-6 flex gap-4">{config.socialLinks?.map((link, index) => <a className="grid h-10 w-10 place-items-center rounded-xl border border-[var(--line)] transition hover:border-[var(--blue)] hover:text-[var(--blue)]" aria-label={link.label}
+    return <footer className="border-t border-(--line) pb-7.5 pt-20">
+        <div className={`mx-auto grid w-[calc(100%-48px)] max-w-298 grid-cols-1 gap-9.5 sm:grid-cols-2 md:grid-cols-3 ${desktopGrid} max-[800px]:w-[calc(100%-32px)] max-[800px]:max-w-170`}>
+            <div className="col-span-full lg:col-span-1"><Brand config={config}/><p className="mt-6 max-w-72.5 leading-[1.6] text-(--muted)">{config.footerIntro}</p>
+                <div className="mt-6 flex gap-4">{config.socialLinks?.map((link, index) => <a className="grid h-10 w-10 place-items-center rounded-xl border border-(--line) transition hover:border-(--blue) hover:text-(--blue)" aria-label={link.label}
                                                                                              key={link.href}
                                                                                              href={link.href}
                                                                                              target="_blank"
@@ -34,8 +34,8 @@ export function Footer({config}: { config: SiteConfig }) {
             <div className={columnClass}><h3 className="mb-2.5 mt-1 text-[13px] font-semibold uppercase tracking-[.08em]">{config.footerCtaTitle || "Un projet ?"}</h3><CmsButton
                 button={config.headerButton} className="whitespace-nowrap px-4"/></div>
         </div>
-        <div className="mx-auto mt-[60px] flex w-[calc(100%-48px)] max-w-[1192px] justify-between border-t border-[var(--line)] pt-[25px] text-[13px] text-[var(--muted)] max-[600px]:flex-col max-[600px]:gap-4 max-[800px]:w-[calc(100%-32px)] max-[800px]:max-w-[680px]"><span>{config.copyright}</span>
-            <div className="flex gap-[18px] max-[600px]:flex-wrap">{config.legalLinks?.map((link) => <Link className="text-xs hover:text-[var(--blue)]" key={link.href} href={link.href}>{link.label}</Link>)}</div>
+        <div className="mx-auto mt-15 flex w-[calc(100%-48px)] max-w-298 justify-between border-t border-(--line) pt-6.25 text-[13px] text-(--muted) max-[600px]:flex-col max-[600px]:gap-4 max-[800px]:w-[calc(100%-32px)] max-[800px]:max-w-170"><span>{config.copyright}</span>
+            <div className="flex gap-4.5 max-[600px]:flex-wrap">{config.legalLinks?.map((link) => <Link className="text-xs hover:text-(--blue)" key={link.href} href={link.href}>{link.label}</Link>)}</div>
         </div>
     </footer>;
 }

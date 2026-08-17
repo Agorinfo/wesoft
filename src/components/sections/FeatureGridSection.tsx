@@ -5,7 +5,7 @@ import { CONTENT, ICONS, list, sectionClass, SectionHeading, text } from "./shar
 export function FeatureGridSection({ block }: { block: PageBlock }) {
   return <section id={text(block.anchorId)} className={sectionClass(block)}>
     <div className={CONTENT}>
-      <SectionHeading eyebrow={text(block.eyebrow)} title={text(block.title)} body={text(block.text)} />
+      <SectionHeading className="mx-auto text-center" eyebrow={text(block.eyebrow)} title={text(block.title)} body={text(block.text)} />
       <div className="grid grid-cols-4 gap-[18px] max-[1000px]:grid-cols-2 max-[600px]:grid-cols-1">
         {list<Feature>(block.features).map((item, index) => {
           const Icon = ICONS[index % ICONS.length];
@@ -14,7 +14,7 @@ export function FeatureGridSection({ block }: { block: PageBlock }) {
               {item.icon ? <CmsIcon icon={item.icon} /> : <Icon size={20} />}
             </span>
             <h3 className="mb-3 mt-6 font-[Hanken] text-2xl font-bold leading-[1.2]">{item.title}</h3>
-            <p className="m-0 text-[15px] leading-6 opacity-[.78]">{item.text}</p>
+            <p className="m-0 text-base leading-6 opacity-[.78]">{item.text}</p>
           </article>;
         })}
       </div>

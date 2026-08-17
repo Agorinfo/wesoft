@@ -41,6 +41,7 @@ export type Feature = {
   text?: string;
   icon?: CmsIconValue;
   backgroundColor?: string;
+  colSpan?: number;
 };
 
 export type FormField = {
@@ -98,7 +99,10 @@ export type Testimonial = {
   author?: string;
   role?: string;
   avatar?: Media;
+  metrics?: Metric[];
 };
+
+export type Metric = { id?: number; value: string; label: string; icon?: CmsIconValue };
 
 export type TeamMember = {
   id?: number;
