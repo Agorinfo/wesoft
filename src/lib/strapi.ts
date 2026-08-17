@@ -69,7 +69,7 @@ export function mediaUrl(url?: string) {
 }
 
 export async function getSiteConfig(): Promise<SiteConfig | null> {
-  const response = await cmsFetch<ApiResponse<Entity<SiteConfig>>>("/api/site-config?populate[logo]=true&populate[navigation][populate][children]=true&populate[headerButton]=true&populate[footerColumns][populate][links]=true&populate[socialLinks]=true&populate[legalLinks]=true");
+  const response = await cmsFetch<ApiResponse<Entity<SiteConfig>>>("/api/site-config?populate[logo]=true&populate[navigation][populate][children]=true&populate[headerButton]=true&populate[footerColumns][populate][links]=true&populate[socialLinks]=true&populate[legalLinks]=true&populate[articleSidebarPrimaryButton]=true&populate[articleSidebarSecondaryButton]=true");
   return flatten(response?.data);
 }
 
@@ -99,7 +99,7 @@ export async function getArticles(limit = 12): Promise<Article[]> {
 }
 
 export async function getArticle(slug: string): Promise<Article | null> {
-  const response = await cmsFetch<ApiResponse<Entity<Article>[]>>(`/api/articles?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[cover]=true&populate[sidebarButton]=true&populate[relatedArticles][populate][cover]=true&populate[seo][populate]=*`);
+  const response = await cmsFetch<ApiResponse<Entity<Article>[]>>(`/api/articles?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[cover]=true&populate[relatedArticles][populate][cover]=true&populate[seo][populate]=*`);
   return flatten(response?.data?.[0]);
 }
 

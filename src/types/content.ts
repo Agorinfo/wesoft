@@ -33,6 +33,12 @@ export type SiteConfig = {
   legalLinks?: NavItem[];
   footerCtaTitle?: string;
   copyright?: string;
+  articleSidebarPrimaryTitle?: string;
+  articleSidebarPrimaryText?: string;
+  articleSidebarPrimaryButton?: CmsButton;
+  articleSidebarSecondaryTitle?: string;
+  articleSidebarSecondaryText?: string;
+  articleSidebarSecondaryButton?: CmsButton;
 };
 
 export type Feature = {
@@ -74,9 +80,6 @@ export type Article = {
   videoUrl?: string;
   videoTitle?: string;
   buttonLabel?: string;
-  sidebarTitle?: string;
-  sidebarText?: string;
-  sidebarButton?: CmsButton;
   relatedArticles?: Article[];
   seo?: { metaTitle?: string; metaDescription?: string; shareImage?: Media };
 };

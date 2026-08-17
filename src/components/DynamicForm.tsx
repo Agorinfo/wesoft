@@ -28,13 +28,14 @@ export function DynamicForm({ form, variant = "card" }: DynamicFormProps) {
   const formClass = variant === "embedded"
     ? "dynamic-form mt-7 grid grid-cols-2 gap-x-5 gap-y-5 max-[600px]:grid-cols-1"
     : "dynamic-form grid grid-cols-2 gap-[22px] rounded-[10px] bg-white p-[38px] shadow-[var(--shadow)] max-[600px]:grid-cols-1 max-[600px]:p-6";
+  const embedded = variant === "embedded";
 
   return (
     <form className={formClass} onSubmit={submit}>
       {form.fields?.map((field) => (
         <div className={`flex flex-col gap-2 ${field.width !== "half" ? "col-span-full" : "max-[600px]:col-span-full"}`} key={field.name}>
           {field.type === "checkbox" ? (
-            <label className="flex cursor-pointer items-start gap-3 rounded-md bg-[var(--sky)] px-4 py-3 text-sm leading-5 text-[var(--muted)]">
+            <label className={`flex cursor-pointer items-start gap-3 text-sm leading-5 text-[var(--muted)] ${embedded ? "px-0 py-1" : "rounded-md bg-[var(--sky)] px-4 py-3"}`}>
               <input className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--blue)]" type="checkbox" name={field.name} required={field.required} />
               <span>{field.label}</span>
             </label>
@@ -47,11 +48,11 @@ export function DynamicForm({ form, variant = "card" }: DynamicFormProps) {
           )}
         </div>
       ))}
-      <div className="col-span-full mt-1 flex flex-wrap items-center gap-x-5 gap-y-3">
+      <div className={`col-span-full mt-1 flex flex-wrap items-center gap-x-5 gap-y-3 ${embedded ? "justify-end border-t border-[#d8e0e8] pt-5" : ""}`}>
         <button className="inline-flex min-h-[50px] items-center justify-center rounded bg-[var(--blue)] px-7 text-[15px] font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-[var(--blue-2)] disabled:cursor-wait disabled:opacity-70" disabled={status === "sending"}>
           {status === "sending" ? "Envoi en cours…" : form.submitLabel || "Envoyer"}
         </button>
-        <p className="m-0 text-xs leading-5 text-[var(--muted)]">Les champs marqués d’un * sont obligatoires.</p>
+        {!embedded && <p className="m-0 text-xs leading-5 text-[var(--muted)]">Les champs marqués d’un * sont obligatoires.</p>}
       </div>
       <div aria-live="polite" className="col-span-full min-h-5 text-sm font-semibold text-[var(--blue)]">
         {status === "success" && (form.successMessage || "Merci, votre demande a bien été envoyée.")}
