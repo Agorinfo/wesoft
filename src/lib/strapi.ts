@@ -85,8 +85,7 @@ export async function getPage(slug: string): Promise<CmsPage | null> {
     "populate[blocks][on][sections.business-characteristics][populate][cards]=true",
     "populate[blocks][on][sections.business-characteristics][populate][button]=true",
     "populate[blocks][on][sections.testimonial-metrics][populate][testimonials][populate][avatar]=true",
-    "populate[blocks][on][sections.testimonial-metrics][populate][testimonials][populate][metrics][populate]=*",
-    "populate[blocks][on][sections.testimonial-metrics][populate][metrics]=true",
+    "populate[blocks][on][sections.testimonial-metrics][populate][testimonials][populate][metrics]=true",
     "populate[blocks][on][sections.team][populate][members][populate]=*",
   ];
   const blockPopulate = [...simpleBlocks, ...nestedBlocks].join("&");
