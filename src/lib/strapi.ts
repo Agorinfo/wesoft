@@ -76,12 +76,14 @@ export async function getSiteConfig(): Promise<SiteConfig | null> {
 export async function getPage(slug: string): Promise<CmsPage | null> {
   const query = encodeURIComponent(slug);
   const simpleBlocks = [
-    "sections.hero", "sections.feature-grid", "sections.process", "sections.business-characteristics",
+    "sections.hero", "sections.feature-grid", "sections.process",
     "sections.metrics", "sections.cta", "sections.article-list", "sections.form-section", "sections.rich-text",
     "sections.contact", "sections.legal-content",
   ].map((name) => `populate[blocks][on][${name}][populate]=*`);
   const nestedBlocks = [
     "populate[blocks][on][sections.software-showcase][populate][items][populate]=*",
+    "populate[blocks][on][sections.business-characteristics][populate][cards]=true",
+    "populate[blocks][on][sections.business-characteristics][populate][button]=true",
     "populate[blocks][on][sections.testimonial-metrics][populate][testimonials][populate][avatar]=true",
     "populate[blocks][on][sections.testimonial-metrics][populate][testimonials][populate][metrics][populate]=*",
     "populate[blocks][on][sections.testimonial-metrics][populate][metrics]=true",
