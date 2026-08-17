@@ -20,7 +20,7 @@ function Card({ item, index }: { item: Feature; index: number }) {
   return <article className={`relative ${spanClass} flex min-h-52.5 flex-col justify-center overflow-hidden rounded-lg px-8.5 py-9 max-[800px]:col-span-1 max-[600px]:min-h-47.5`} style={{ backgroundColor: background, color }}>
     {item.icon
       ? <CmsIcon icon={item.icon} className="absolute -right-2 top-5 opacity-20" />
-      : <Icon className="absolute -right-0.5 -top-3.75 h-26.25 w-26.25 opacity-10" aria-hidden />}
+      : <Icon className="absolute -right-3.75 -top-3.75 h-26.25 w-26.25 opacity-10" aria-hidden />}
     <h3 className="relative z-2 mb-3.5 max-w-[90%] font-[Hanken] text-[22px] font-bold leading-[1.2]">{item.title}</h3>
     <p className="relative z-2 m-0 max-w-[90%] text-base leading-[1.6] opacity-[.78]">{item.text}</p>
   </article>;
