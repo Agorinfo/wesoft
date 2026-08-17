@@ -1,5 +1,6 @@
 import { CmsButton } from "@/components/CmsButton";
 import { CmsIcon } from "@/components/CmsIcon";
+import type { CSSProperties } from "react";
 import type { CmsButton as ButtonData, Feature, PageBlock } from "@/types/content";
 import { CONTENT, ICONS, list, sectionClass, SectionHeading, text } from "./shared";
 
@@ -11,13 +12,9 @@ function Card({ item, index }: { item: Feature; index: number }) {
   const Icon = ICONS[index % ICONS.length];
 
   const colSpan = Math.min(Math.max(Math.round(item.colSpan || 4), 1), 8);
-  const spanClasses: Record<number, string> = {
-    1: "col-span-1", 2: "col-span-2", 3: "col-span-3", 4: "col-span-4",
-    5: "col-span-5", 6: "col-span-6", 7: "col-span-7", 8: "col-span-8",
-  };
-  const spanClass = spanClasses[colSpan];
+  const style = { "--card-span": String(colSpan), backgroundColor: background, color } as CSSProperties;
 
-  return <article className={`relative ${spanClass} flex min-h-52.5 flex-col justify-center overflow-hidden rounded-lg px-8.5 py-9 max-[800px]:col-span-1 max-[600px]:min-h-47.5`} style={{ backgroundColor: background, color }}>
+  return <article className="relative col-span-[var(--card-span)] flex min-h-52.5 flex-col justify-center overflow-hidden rounded-lg px-8.5 py-9 max-[800px]:col-span-1 max-[600px]:min-h-47.5" style={style}>
     {item.icon
       ? <CmsIcon icon={item.icon} className="absolute -right-2 top-5 opacity-20" />
       : <Icon className="absolute -right-3.75 -top-3.75 h-26.25 w-26.25 opacity-10" aria-hidden />}
