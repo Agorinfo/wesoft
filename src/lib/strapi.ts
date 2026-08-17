@@ -82,7 +82,8 @@ export async function getPage(slug: string): Promise<CmsPage | null> {
   ].map((name) => `populate[blocks][on][${name}][populate]=*`);
   const nestedBlocks = [
     "populate[blocks][on][sections.software-showcase][populate][items][populate]=*",
-    "populate[blocks][on][sections.testimonial-metrics][populate][testimonials][populate]=*",
+    "populate[blocks][on][sections.testimonial-metrics][populate][testimonials][populate][avatar]=true",
+    "populate[blocks][on][sections.testimonial-metrics][populate][testimonials][populate][metrics][populate]=*",
     "populate[blocks][on][sections.testimonial-metrics][populate][metrics]=true",
     "populate[blocks][on][sections.team][populate][members][populate]=*",
   ];

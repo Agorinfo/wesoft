@@ -29,8 +29,8 @@ function Card({ item, index }: { item: Feature; index: number }) {
 export function BusinessCharacteristicsSection({ block }: { block: PageBlock }) {
   return <section id={text(block.anchorId)} className={sectionClass(block)}><div className={CONTENT}>
     <div className="flex items-center justify-between gap-8.75 max-[800px]:block">
-      <SectionHeading className="mb-10.5" eyebrow={text(block.eyebrow)} title={text(block.title)} body={text(block.text)} />
-      <CmsButton button={block.button as ButtonData} />
+      <SectionHeading className="mb-10.5 max-[800px]:mb-6" eyebrow={text(block.eyebrow)} title={text(block.title)} body={text(block.text)} />
+      <CmsButton button={block.button as ButtonData} className="max-[800px]:mb-6" />
     </div>
     <div className="grid grid-cols-8 gap-4.5 max-[800px]:grid-cols-1">
       {list<Feature>(block.cards).map((item, index) => <Card item={item} index={index} key={item.id || index} />)}

@@ -3,7 +3,7 @@ import type { CmsButton as ButtonData } from "@/types/content";
 
 const variants = {
   primary: "!border-0 !bg-[var(--blue)] !text-white hover:!bg-[var(--blue-2)]",
-  secondary: "!border-[var(--blue)] !bg-transparent !text-[var(--blue)]",
+  secondary: "!border !border-[var(--blue)] !bg-transparent !text-[var(--blue)]",
   ghost: "!border-white/60 !bg-transparent !text-white",
   light: "!border-0 !bg-white !text-[var(--blue)]",
 };
