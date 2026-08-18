@@ -27,6 +27,6 @@ export default async function Page({params}: { params: Promise<{ slug: string }>
     const cmsPage = await getPage(slug);
     const page = fallbackPages[slug] ? mergePageWithFallback(cmsPage, fallbackPages[slug]) : cmsPage;
     if (!page) notFound();
-    const hasHero = page.blocks?.some((block) => block.__component === "sections.hero");
-    return <>{hasHero && <PageBreadcrumb current={page.title}/>}<SectionRenderer blocks={page.blocks}/></>;
+    const hero = page.blocks?.find((block) => block.__component === "sections.hero");
+    return <>{hero && <PageBreadcrumb current={page.title} background={typeof hero.background === "string" ? hero.background : undefined}/>}<SectionRenderer blocks={page.blocks}/></>;
 }
