@@ -14,9 +14,9 @@ import { SoftwareShowcaseSection } from "./sections/SoftwareShowcaseSection";
 import { TeamSection } from "./sections/TeamSection";
 import { TestimonialMetricsSection } from "./sections/TestimonialMetricsSection";
 
-async function renderSection(block: PageBlock, key: string, hasHero: boolean) {
+async function renderSection(block: PageBlock, key: string, hasHero: boolean, hasBreadcrumb: boolean) {
   switch (block.__component) {
-    case "sections.hero": return <HeroSection key={key} block={block} />;
+    case "sections.hero": return <HeroSection key={key} block={block} hasBreadcrumb={hasBreadcrumb} />;
     case "sections.feature-grid": return <FeatureGridSection key={key} block={block} />;
     case "sections.process": return <ProcessSection key={key} block={block} />;
     case "sections.software-showcase": return <SoftwareShowcaseSection key={key} block={block} />;
@@ -34,7 +34,7 @@ async function renderSection(block: PageBlock, key: string, hasHero: boolean) {
   }
 }
 
-export async function SectionRenderer({ blocks = [] }: { blocks?: PageBlock[] }) {
+export async function SectionRenderer({ blocks = [], hasBreadcrumb = false }: { blocks?: PageBlock[]; hasBreadcrumb?: boolean }) {
   const hasHero = blocks.some((block) => block.__component === "sections.hero");
-  return <>{await Promise.all(blocks.map((block, index) => renderSection(block, `${block.__component}-${block.id}-${index}`, hasHero)))}</>;
+  return <>{await Promise.all(blocks.map((block, index) => renderSection(block, `${block.__component}-${block.id}-${index}`, hasHero, hasBreadcrumb)))}</>;
 }

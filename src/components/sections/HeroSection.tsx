@@ -13,7 +13,7 @@ function HeroTitle({ value }: { value: string }) {
   return <>{value.slice(0, at)}<span className="text-[var(--blue)]">{value.slice(at, at + marker.length)}</span>{value.slice(at + marker.length)}</>;
 }
 
-export function HeroSection({ block }: { block: PageBlock }) {
+export function HeroSection({ block, hasBreadcrumb = false }: { block: PageBlock; hasBreadcrumb?: boolean }) {
   const image = block.image as Media | undefined;
   const floatingIcon = block.floatingIcon as CmsIconValue | undefined;
   const hasImage = Boolean(image?.url);
@@ -21,7 +21,7 @@ export function HeroSection({ block }: { block: PageBlock }) {
   const hasLargeTiltedImage = hasTiltedImage && text(block.imageTiltSize) === "large";
   const isTextOnly = !hasImage;
 
-  return <section id={text(block.anchorId)} className={`overflow-hidden py-20 max-[800px]:py-[65px] ${isTextOnly ? "py-14 max-[800px]:py-12" : ""} ${hasTiltedImage && !hasLargeTiltedImage ? "py-12 max-[800px]:py-14" : ""} ${backgroundClass(block)}`}>
+  return <section id={text(block.anchorId)} className={`overflow-hidden py-20 max-[800px]:py-[65px] ${isTextOnly ? "py-14 max-[800px]:py-12" : ""} ${hasTiltedImage && !hasLargeTiltedImage ? "py-12 max-[800px]:py-14" : ""} ${hasBreadcrumb ? "pt-8 max-[800px]:pt-7" : ""} ${backgroundClass(block)}`}>
     <div className={`${CONTENT} grid grid-cols-[604fr_564fr] gap-6 max-[1000px]:grid-cols-2 max-[800px]:grid-cols-1 max-[800px]:gap-[45px] ${isTextOnly ? "grid-cols-1" : ""} ${hasTiltedImage && !hasLargeTiltedImage ? "grid-cols-[minmax(0,1fr)_310px] items-center gap-18 max-[1000px]:gap-10 max-[800px]:gap-8" : ""}`}>
       <div className="relative z-[2]">
         {text(block.eyebrow) && <span className="mb-3 block text-sm font-extrabold uppercase tracking-[.08em] text-[var(--blue)]">{text(block.eyebrow)}</span>}
