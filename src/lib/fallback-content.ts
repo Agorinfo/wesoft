@@ -52,13 +52,21 @@ const legalBlocks = (kind: "mentions" | "privacy") => kind === "mentions" ? [
 
 export const fallbackPages: Record<string, CmsPage> = {
   contact: { id: 2, title: "Contact", slug: "contact", blocks: [{ id: 1, __component: "sections.hero", eyebrow: "REJOIGNEZ-NOUS", title: "Entrons en contact !", text: "Vous êtes un éditeur de logiciel métier et vous souhaitez accélérer votre croissance au sein d’un écosystème d’experts ? Échangeons sur vos ambitions et l’avenir de votre solution.", image: { url: "/images/contact-office.png", alternativeText: "Bureaux WeSoft" }, background: "sky" }, { id: 2, __component: "sections.contact", title: "Formulaire de contact", officeTitle: "Le siège", officeName: "Siège Social - Isneauville", address: "218 Rue de la Ronce\n76230 Isneauville, France", socialTitle: "Suivez-nous", socialText: "Restez informé de nos actualités et des opportunités du groupe.", socialLabel: "LinkedIn - WeSoft Group", socialHref: "https://www.linkedin.com", background: "sky", fallbackForm: true }] },
-  "mentions-legales": { id: 3, title: "Mentions Légales", slug: "mentions-legales", blocks: [{ id: 1, __component: "sections.legal-content", title: "Mentions Légales", text: "Informations légales concernant l’éditeur, l’hébergeur et les conditions d’utilisation du site WeSoft.", background: "sky", sections: legalBlocks("mentions") }] },
-  "politique-de-confidentialite": { id: 4, title: "Politique de Confidentialité", slug: "politique-de-confidentialite", blocks: [{ id: 1, __component: "sections.legal-content", title: "Politique de Confidentialité", text: "Chez WeSoft, nous accordons une importance capitale à la protection de vos données personnelles. Cette politique détaille nos engagements en conformité avec le RGPD.", background: "sky", sections: legalBlocks("privacy") }] },
+  "mentions-legales": { id: 3, title: "Mentions Légales", slug: "mentions-legales", blocks: [{ id: 1, __component: "sections.hero", eyebrow: "INFORMATIONS", title: "Mentions légales", text: "Retrouvez les informations relatives à l’éditeur du site et à ses conditions d’utilisation.", background: "sky" }, { id: 2, __component: "sections.legal-content", title: "Mentions Légales", text: "Informations légales concernant l’éditeur, l’hébergeur et les conditions d’utilisation du site WeSoft.", background: "sky", sections: legalBlocks("mentions") }] },
+  "politique-de-confidentialite": { id: 4, title: "Politique de Confidentialité", slug: "politique-de-confidentialite", blocks: [{ id: 1, __component: "sections.hero", eyebrow: "VOS DONNÉES", title: "Politique de confidentialité", text: "Découvrez comment WeSoft protège vos données personnelles et les droits dont vous disposez.", background: "sky" }, { id: 2, __component: "sections.legal-content", title: "Politique de Confidentialité", text: "Chez WeSoft, nous accordons une importance capitale à la protection de vos données personnelles. Cette politique détaille nos engagements en conformité avec le RGPD.", background: "sky", sections: legalBlocks("privacy") }] },
 };
 
 export function mergePageWithFallback(cms: CmsPage | null, fallback: CmsPage): CmsPage {
-  // The fallback is only an availability safeguard. Once Strapi returns a page,
-  // its dynamic zone is authoritative: removing or reordering a block in the
-  // back office must produce the same result on the website.
-  return cms || fallback;
+  if (!cms) return fallback;
+
+  const isLegalPage = fallback.slug === "mentions-legales" || fallback.slug === "politique-de-confidentialite";
+  const hasLegalContent = cms.blocks?.some((block) => block.__component === "sections.legal-content" && Array.isArray(block.sections) && block.sections.length > 0);
+  if (!isLegalPage || hasLegalContent) return cms;
+
+  const fallbackContent = fallback.blocks?.find((block) => block.__component === "sections.legal-content");
+  const legacyRichText = cms.blocks?.find((block) => block.__component === "sections.rich-text");
+  if (fallbackContent && legacyRichText) {
+    return { ...cms, blocks: (cms.blocks || []).map((block) => block === legacyRichText ? { ...fallbackContent, id: block.id } : block) };
+  }
+  return fallbackContent ? { ...cms, blocks: [...(cms.blocks || []), fallbackContent] } : cms;
 }
