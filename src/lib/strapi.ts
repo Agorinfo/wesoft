@@ -78,7 +78,7 @@ export async function getPage(slug: string): Promise<CmsPage | null> {
   const simpleBlocks = [
     "sections.hero", "sections.feature-grid", "sections.process",
     "sections.metrics", "sections.cta", "sections.article-list", "sections.form-section", "sections.rich-text",
-    "sections.contact", "sections.legal-content",
+    "sections.contact",
   ].map((name) => `populate[blocks][on][${name}][populate]=*`);
   const nestedBlocks = [
     "populate[blocks][on][sections.software-showcase][populate][items][populate]=*",
@@ -87,6 +87,7 @@ export async function getPage(slug: string): Promise<CmsPage | null> {
     "populate[blocks][on][sections.testimonial-metrics][populate][testimonials][populate][avatar]=true",
     "populate[blocks][on][sections.testimonial-metrics][populate][testimonials][populate][metrics]=true",
     "populate[blocks][on][sections.team][populate][members][populate]=*",
+    "populate[blocks][on][sections.legal-content][populate][sections]=true",
   ];
   const blockPopulate = [...simpleBlocks, ...nestedBlocks].join("&");
   const response = await cmsFetch<ApiResponse<Entity<CmsPage>[]>>(`/api/pages?filters[slug][$eq]=${query}&populate[seo][populate]=*&${blockPopulate}`);
