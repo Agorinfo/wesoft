@@ -28,7 +28,7 @@
 @layer base {
   * { @apply box-border; }
   html { @apply scroll-smooth; }
-  body { @apply m-0 bg-white font-[Inter] text-[var(--ink)]; }
+  body { @apply m-0 bg-white font-[Inter] text-base text-[var(--ink)]; }
   a { @apply text-inherit no-underline; }
   img { @apply max-w-full; }
   button, input, textarea, select { font: inherit; }

@@ -18,7 +18,7 @@ function Card({item, index}: { item: Feature; index: number }) {
         {item.icon
             ? <CmsIcon icon={item.icon} className="absolute -right-2 top-5 opacity-20"/>
             : <Icon className="absolute -right-3.75 -top-3.75 h-26.25 w-26.25 opacity-10" aria-hidden/>}
-        <h3 className="relative z-2 mb-3.5 max-w-[90%] font-[Hanken] text-[22px] font-bold leading-[1.2]">{item.title}</h3>
+        <h3 className="relative z-2 mb-3.5 max-w-[90%] font-[Hanken] text-2xl font-bold leading-[1.2]">{item.title}</h3>
         <p className="relative z-2 m-0 max-w-[90%] text-base leading-[1.6] opacity-[.78]">{item.text}</p>
     </article>;
 }

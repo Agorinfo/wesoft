@@ -16,17 +16,19 @@ function HeroTitle({ value }: { value: string }) {
 export function HeroSection({ block }: { block: PageBlock }) {
   const image = block.image as Media | undefined;
   const floatingIcon = block.floatingIcon as CmsIconValue | undefined;
+  const hasImage = Boolean(image?.url);
   const hasTiltedImage = block.imageTilt === true;
   const hasLargeTiltedImage = hasTiltedImage && text(block.imageTiltSize) === "large";
+  const isTextOnly = !hasImage;
 
-  return <section id={text(block.anchorId)} className={`overflow-hidden py-20 max-[800px]:py-[65px] ${hasTiltedImage && !hasLargeTiltedImage ? "py-12 max-[800px]:py-14" : ""} ${backgroundClass(block)}`}>
-    <div className={`${CONTENT} grid grid-cols-[604fr_564fr] gap-6 max-[1000px]:grid-cols-2 max-[800px]:grid-cols-1 max-[800px]:gap-[45px] ${hasTiltedImage && !hasLargeTiltedImage ? "grid-cols-[minmax(0,1fr)_310px] items-center gap-18 max-[1000px]:gap-10 max-[800px]:gap-8" : ""}`}>
+  return <section id={text(block.anchorId)} className={`overflow-hidden py-20 max-[800px]:py-[65px] ${isTextOnly ? "py-14 max-[800px]:py-12" : ""} ${hasTiltedImage && !hasLargeTiltedImage ? "py-12 max-[800px]:py-14" : ""} ${backgroundClass(block)}`}>
+    <div className={`${CONTENT} grid grid-cols-[604fr_564fr] gap-6 max-[1000px]:grid-cols-2 max-[800px]:grid-cols-1 max-[800px]:gap-[45px] ${isTextOnly ? "grid-cols-1" : ""} ${hasTiltedImage && !hasLargeTiltedImage ? "grid-cols-[minmax(0,1fr)_310px] items-center gap-18 max-[1000px]:gap-10 max-[800px]:gap-8" : ""}`}>
       <div className="relative z-[2]">
-        {text(block.eyebrow) && <span className="mb-3 block text-xs font-extrabold uppercase tracking-[.08em] text-[var(--blue)]">{text(block.eyebrow)}</span>}
-        <h1 className={`m-0 font-[Hanken] font-extrabold leading-[1.25] tracking-[-.025em] ${hasTiltedImage ? "text-[34px] max-[800px]:text-[32px]" : "text-5xl max-[800px]:text-[38px]"}`}>
+        {text(block.eyebrow) && <span className="mb-3 block text-sm font-extrabold uppercase tracking-[.08em] text-[var(--blue)]">{text(block.eyebrow)}</span>}
+        <h1 className={`m-0 font-[Hanken] font-extrabold leading-[1.25] tracking-[-.025em] ${hasTiltedImage || isTextOnly ? "text-[34px] max-[800px]:text-[32px]" : "text-5xl max-[800px]:text-[38px]"}`}>
           <HeroTitle value={text(block.title)} />
         </h1>
-        <p className="my-6 max-w-[570px] text-lg leading-[1.6] text-[var(--muted)]">{text(block.text)}</p>
+        <p className="my-6 max-w-[570px] text-base leading-[1.6] text-[var(--muted)]">{text(block.text)}</p>
         <div className="flex flex-wrap gap-3 max-[600px]:[&_a]:w-full">
           {list<ButtonData>(block.buttons).map((button, index) => <CmsButton key={button.id || index} button={button} />)}
         </div>

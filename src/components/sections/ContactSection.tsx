@@ -1,5 +1,4 @@
 import { Linkedin, MapPin, Share2 } from "lucide-react";
-import Link from "next/link";
 import { CmsIcon } from "@/components/CmsIcon";
 import { DynamicForm } from "@/components/DynamicForm";
 import { getForm } from "@/lib/strapi";
@@ -52,15 +51,12 @@ export async function ContactSection({ block }: { block: PageBlock }) {
 
   return (
     <section className={`${sectionClass(block)} overflow-hidden`}>
-      <div className={CONTENT}>
-        <nav className="mb-7 flex items-center gap-2 text-xs text-(--muted)" aria-label="Fil d’Ariane"><Link href="/">Accueil</Link><span>›</span><strong className="font-semibold text-(--blue)">Contact</strong></nav>
-      </div>
       <div className={`${CONTENT} grid grid-cols-[minmax(280px,.8fr)_minmax(0,1.65fr)] items-start gap-6 max-[1000px]:grid-cols-1 max-[1000px]:gap-8`}>
         <aside className="grid gap-6">
           <div className="rounded-[7px] border border-[#dbe3eb] bg-white p-6 shadow-[0_8px_20px_rgba(18,50,85,.04)]">
             <div className="flex items-center gap-2 text-[var(--blue)]">
               <span className="grid h-6 w-6 place-items-center">{officeIcon ? <CmsIcon icon={officeIcon} /> : <MapPin size={23} strokeWidth={2.2} />}</span>
-              <h2 className="m-0 font-[Hanken] text-[25px] font-bold leading-tight text-[var(--ink)]">{officeTitle}</h2>
+              <h2 className="m-0 font-[Hanken] text-2xl font-bold leading-tight text-[var(--ink)]">{officeTitle}</h2>
             </div>
             {text(block.officeName) && <p className="mb-1 mt-4 text-sm font-bold text-[var(--blue)]">{text(block.officeName)}</p>}
             {text(block.address) && <p className="m-0 whitespace-pre-line text-base leading-6 text-[var(--muted)]">{text(block.address)}</p>}
@@ -69,7 +65,7 @@ export async function ContactSection({ block }: { block: PageBlock }) {
           <div className="rounded-[7px] border border-[#dbe3eb] bg-white p-6 shadow-[0_8px_20px_rgba(18,50,85,.04)]">
             <div className="flex items-center gap-2 text-[var(--blue)]">
               <span className="grid h-6 w-6 place-items-center">{socialIcon ? <CmsIcon icon={socialIcon} /> : <Share2 size={22} strokeWidth={2.2} />}</span>
-              <h2 className="m-0 font-[Hanken] text-[25px] font-bold leading-tight text-[var(--ink)]">{socialTitle}</h2>
+              <h2 className="m-0 font-[Hanken] text-2xl font-bold leading-tight text-[var(--ink)]">{socialTitle}</h2>
             </div>
             {text(block.socialText) && <p className="mb-5 mt-4 text-base leading-6 text-[var(--muted)]">{text(block.socialText)}</p>}
             {socialHref && (
@@ -91,8 +87,8 @@ export async function ContactSection({ block }: { block: PageBlock }) {
         </aside>
 
         <div className="rounded-[7px] border border-[#dbe3eb] bg-white p-6 shadow-[0_8px_20px_rgba(18,50,85,.04)] max-[700px]:p-5">
-          <h2 className="m-0 font-[Hanken] text-[31px] font-bold leading-[1.15] tracking-[-.025em] max-[600px]:text-[27px]">{text(block.title) || form?.title || "Formulaire de contact"}</h2>
-          {form?.description && <p className="mb-6 mt-3 max-w-[610px] text-[15px] leading-6 text-[var(--muted)]">{form.description}</p>}
+          <h2 className="m-0 font-[Hanken] text-[32px] font-bold leading-[1.15] tracking-[-.025em] max-[600px]:text-2xl">{text(block.title) || form?.title || "Formulaire de contact"}</h2>
+          {form?.description && <p className="mb-6 mt-3 max-w-[610px] text-base leading-6 text-[var(--muted)]">{form.description}</p>}
           {form && <DynamicForm form={form} variant="embedded" />}
         </div>
       </div>

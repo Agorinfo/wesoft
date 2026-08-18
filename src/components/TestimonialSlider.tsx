@@ -9,7 +9,7 @@ import type { CmsIconValue, Media, Metric, Testimonial } from "@/types/content";
 import { CONTENT } from "./sections/shared";
 
 function Avatar({ media, name }: { media?: Media; name?: string }) {
-  if (media?.url) return <Image className="rounded-[7px] object-cover" src={mediaUrl(media.url)} alt={media.alternativeText || name || ""} fill sizes="52px" />;
+  if (media?.url) return <span className="relative block h-full w-full overflow-hidden rounded-[7px]"><Image className="object-cover" src={mediaUrl(media.url)} alt={media.alternativeText || name || ""} fill sizes="52px" /></span>;
   const initials = (name || "WeSoft").split(/\s+/).map((part) => part[0]).slice(0, 2).join("");
   return <span className="grid h-full w-full place-items-center rounded-[7px] bg-[#0057b4] font-bold text-white">{initials}</span>;
 }

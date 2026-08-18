@@ -1,6 +1,7 @@
 import type {Metadata} from "next";
 import {notFound} from "next/navigation";
 import {SectionRenderer} from "@/components/SectionRenderer";
+import {PageBreadcrumb} from "@/components/PageBreadcrumb";
 import {getPage} from "@/lib/strapi";
 import { mediaUrl } from "@/lib/strapi";
 
@@ -21,5 +22,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ArticlesPage() {
   const page = await getPage("articles");
   if (!page) notFound();
-  return <SectionRenderer blocks={page.blocks}/>;
+  const hasHero = page.blocks?.some((block) => block.__component === "sections.hero");
+  return <>{hasHero && <PageBreadcrumb current={page.title}/>}<SectionRenderer blocks={page.blocks}/></>;
 }

@@ -22,8 +22,8 @@ export const sectionClass = (block: PageBlock) => `${SECTION} ${backgroundClass(
 
 export function SectionHeading({ eyebrow, title, body, className = "" }: { eyebrow?: string; title?: string; body?: string; className?: string }) {
   return <div className={`mb-[50px] max-w-[720px] ${className}`}>
-    {eyebrow && <span className="mb-3 block text-xs font-extrabold uppercase tracking-[.08em] text-[var(--blue)]">{eyebrow}</span>}
-    {title && <h2 className="m-0 mb-4 font-[Hanken] text-[32px] font-extrabold leading-[1.2] tracking-[-.025em]">{title}</h2>}
+    {eyebrow && <span className="mb-3 block text-sm font-extrabold uppercase tracking-[.08em] text-[var(--blue)]">{eyebrow}</span>}
+    {title && <h2 className="m-0 mb-4 font-[Hanken] text-2xl font-extrabold leading-[1.2] tracking-[-.025em]">{title}</h2>}
     {body && <p className="m-0 text-base leading-6 text-[var(--muted)]">{body}</p>}
   </div>;
 }

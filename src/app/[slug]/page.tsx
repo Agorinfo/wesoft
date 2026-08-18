@@ -1,6 +1,7 @@
 import type {Metadata} from "next";
 import {notFound, redirect} from "next/navigation";
 import {SectionRenderer} from "@/components/SectionRenderer";
+import {PageBreadcrumb} from "@/components/PageBreadcrumb";
 import {getPage, mediaUrl} from "@/lib/strapi";
 import { fallbackPages, mergePageWithFallback } from "@/lib/fallback-content";
 
@@ -26,5 +27,6 @@ export default async function Page({params}: { params: Promise<{ slug: string }>
     const cmsPage = await getPage(slug);
     const page = fallbackPages[slug] ? mergePageWithFallback(cmsPage, fallbackPages[slug]) : cmsPage;
     if (!page) notFound();
-    return <SectionRenderer blocks={page.blocks}/>;
+    const hasHero = page.blocks?.some((block) => block.__component === "sections.hero");
+    return <>{hasHero && <PageBreadcrumb current={page.title}/>}<SectionRenderer blocks={page.blocks}/></>;
 }

@@ -20,7 +20,7 @@ export function TeamSection({ block }: { block: PageBlock }) {
       {member.photo?.url && <div className="relative h-[385px] overflow-hidden rounded-lg border border-[var(--line)] max-[1100px]:h-[330px]"><Image className="object-cover" src={mediaUrl(member.photo.url)} alt={member.photo.alternativeText || member.name} fill sizes="(max-width: 560px) 100vw, (max-width: 800px) 50vw, 25vw" /></div>}
       <h3 className="mb-1 mt-4 font-[Hanken] text-2xl font-bold text-[var(--blue)]">{member.name}</h3>
       <span className="text-sm font-semibold tracking-[.05em]">{member.role}</span>
-      <p className="text-sm leading-[1.55] text-[var(--muted)]">{member.biography}</p>
+      <p className="text-base leading-[1.55] text-[var(--muted)]">{member.biography}</p>
     </article>)}</div>
   </div></section>;
 }
