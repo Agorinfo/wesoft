@@ -11,7 +11,7 @@ export function ProcessSection({block}: { block: PageBlock }) {
                     {step.icon
                         ? <CmsIcon icon={step.icon} className="mb-4" />
                         : <span className="mb-3 block font-[Hanken] text-[40px] font-extrabold text-[#8fc8ef]">{String(index + 1).padStart(2, "0")}</span>}
-                    <h3 className="mb-3.5 font-[Hanken] text-2xl font-bold leading-[1.2]">{step.title}</h3>
+                    <h3 className="mb-3.5 text-base font-bold leading-[1.2]">{step.title}</h3>
                     <p className="m-0 text-base leading-[1.6] opacity-[.78]">{step.text}</p>
                 </article>)}
             </div>

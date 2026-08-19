@@ -23,5 +23,5 @@ export default async function ArticlesPage() {
   const page = await getPage("articles");
   if (!page) notFound();
   const hero = page.blocks?.find((block) => block.__component === "sections.hero");
-  return <>{hero && <PageBreadcrumb current={page.title} background={typeof hero.background === "string" ? hero.background : undefined}/>}<SectionRenderer blocks={page.blocks} hasBreadcrumb={Boolean(hero)}/></>;
+  return <>{hero && <PageBreadcrumb current={page.title} background={typeof hero.background === "string" ? hero.background : undefined}/>}<SectionRenderer blocks={page.blocks} hasBreadcrumb={Boolean(hero)} removeHeroBottomPadding/></>;
 }

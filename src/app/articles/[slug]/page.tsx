@@ -5,6 +5,7 @@ import {Clock3, Rocket} from "lucide-react";
 import {notFound} from "next/navigation";
 import {getArticle, getArticles, getSiteConfig, mediaUrl} from "@/lib/strapi";
 import {CmsButton} from "@/components/CmsButton";
+import {TiptapContent} from "@/components/TiptapContent";
 import {VideoEmbed} from "@/components/VideoEmbed";
 import { absoluteUrl, toIsoDate } from "@/lib/seo";
 
@@ -56,17 +57,17 @@ export default async function ArticlePage({params}: { params: Promise<{ slug: st
     const asideCtaCard = `${asideCard} relative overflow-hidden`;
     const articleContent = `max-w-none py-9 text-base leading-[1.65] text-[#343943]
         max-[600px]:py-7
-        [&_p]:my-7 [&_p:first-child]:mt-0 [&_p:first-child]:font-[Hanken] [&_p:first-child]:text-[19px] [&_p:first-child]:font-medium [&_p:first-child]:leading-[1.7] [&_p:last-child]:mb-0
+        [&_p]:my-7 [&_p:first-child]:mt-0 [&_p:first-child]:font-[Hanken] [&_p:first-child]:text-base [&_p:first-child]:font-medium [&_p:first-child]:leading-[1.7] [&_p:last-child]:mb-0
         [&_h2]:mb-5 [&_h2]:mt-14 [&_h2]:font-[Hanken] [&_h2]:text-2xl [&_h2]:font-extrabold [&_h2]:leading-[1.2] [&_h2]:tracking-[-.025em] [&_h2]:text-[var(--blue)] [&_h2:first-child]:mt-0
         [&_h3]:mb-4 [&_h3]:mt-9 [&_h3]:font-[Hanken] [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:leading-[1.3] [&_h3]:text-[var(--ink)]
         [&_h4]:mb-3 [&_h4]:mt-8 [&_h4]:font-[Hanken] [&_h4]:text-2xl [&_h4]:font-bold [&_h4]:text-[var(--blue)]
         [&_ul]:my-7 [&_ul]:list-none [&_ul]:space-y-3 [&_ul]:p-0 [&_ul>li]:relative [&_ul>li]:pl-6 [&_ul>li]:leading-[1.75] [&_ul>li]:before:absolute [&_ul>li]:before:left-0 [&_ul>li]:before:top-[.65em] [&_ul>li]:before:h-2 [&_ul>li]:before:w-2 [&_ul>li]:before:rounded-full [&_ul>li]:before:bg-[var(--blue)] [&_ol]:my-7 [&_ol]:list-decimal [&_ol]:space-y-3 [&_ol]:pl-7
-        [&_ol>li]:pl-2 [&_ol>li]:leading-[1.75] [&_ol>li::marker]:font-bold [&_ol>li::marker]:text-[var(--blue)] [&_li>ul]:my-3 [&_li>ol]:my-3
-        [&_blockquote]:relative [&_blockquote]:my-12 [&_blockquote]:border-l-4 [&_blockquote]:border-[var(--blue)] [&_blockquote]:bg-[#edf6ff] [&_blockquote]:px-9 [&_blockquote]:pb-8 [&_blockquote]:pt-10 [&_blockquote]:font-[Hanken] [&_blockquote]:text-2xl [&_blockquote]:font-bold [&_blockquote]:italic [&_blockquote]:leading-[1.48] [&_blockquote]:text-[var(--ink)] [&_blockquote]:before:absolute [&_blockquote]:before:left-6 [&_blockquote]:before:top-[-10px] [&_blockquote]:before:content-['“'] [&_blockquote]:before:font-[Hanken] [&_blockquote]:before:text-[72px] [&_blockquote]:before:font-black [&_blockquote]:before:not-italic [&_blockquote]:before:leading-none [&_blockquote]:before:text-[#a7c4e4] [&_blockquote>p]:m-0 [&_blockquote_cite]:mt-6 [&_blockquote_cite]:block [&_blockquote_cite]:font-[Inter] [&_blockquote_cite]:text-sm [&_blockquote_cite]:font-semibold [&_blockquote_cite]:not-italic [&_blockquote_cite]:text-[var(--blue)]
+        [&_ol>li]:pl-2 [&_ol>li]:leading-[1.75] [&_ol>li::marker]:font-bold [&_ol>li::marker]:text-[var(--blue)] [&_li>p]:m-0 [&_li>ul]:my-3 [&_li>ol]:my-3
+        [&_blockquote]:relative [&_blockquote]:my-12 [&_blockquote]:border-l-4 [&_blockquote]:border-[var(--blue)] [&_blockquote]:bg-[#edf6ff] [&_blockquote]:px-9 [&_blockquote]:pb-8 [&_blockquote]:pt-10 [&_blockquote]:font-[Hanken] [&_blockquote]:text-base [&_blockquote]:font-bold [&_blockquote]:italic [&_blockquote]:leading-[1.48] [&_blockquote]:text-[var(--ink)] [&_blockquote]:before:absolute [&_blockquote]:before:left-6 [&_blockquote]:before:top-[-10px] [&_blockquote]:before:content-['“'] [&_blockquote]:before:font-[Hanken] [&_blockquote]:before:text-[72px] [&_blockquote]:before:font-black [&_blockquote]:before:not-italic [&_blockquote]:before:leading-none [&_blockquote]:before:text-[#a7c4e4] [&_blockquote>p]:m-0 [&_blockquote_cite]:mt-6 [&_blockquote_cite]:block [&_blockquote_cite]:font-[Inter] [&_blockquote_cite]:text-sm [&_blockquote_cite]:font-semibold [&_blockquote_cite]:not-italic [&_blockquote_cite]:text-[var(--blue)]
         [&_a]:font-semibold [&_a]:text-[var(--blue)] [&_a]:underline [&_a]:decoration-[#8fc8ef] [&_a]:decoration-2 [&_a]:underline-offset-4 hover:[&_a]:decoration-[var(--blue)]
         [&_strong]:font-bold [&_strong]:text-[var(--ink)] [&_em]:text-[var(--muted)]
         [&_hr]:my-10 [&_hr]:border-0 [&_hr]:border-t [&_hr]:border-[var(--line)]
-        [&_figure]:my-10 [&_figure_img]:w-full [&_figure_img]:rounded-[4px] [&_figure_img]:shadow-[0_8px_24px_rgba(18,50,85,.08)] [&_figcaption]:mt-3 [&_figcaption]:text-center [&_figcaption]:text-sm [&_figcaption]:italic [&_figcaption]:text-[var(--muted)]
+        [&_figure]:my-10 [&_figure_img]:w-full [&_figure_img]:rounded-[4px] [&_figure_img]:shadow-[0_8px_24px_rgba(18,50,85,.08)] [&_img]:my-10 [&_img]:w-full [&_img]:rounded-[4px] [&_img]:shadow-[0_8px_24px_rgba(18,50,85,.08)] [&_figcaption]:mt-3 [&_figcaption]:text-center [&_figcaption]:text-sm [&_figcaption]:italic [&_figcaption]:text-[var(--muted)]
         [&_table]:my-9 [&_table]:block [&_table]:w-full [&_table]:overflow-x-auto [&_table]:border-collapse [&_th]:border [&_th]:border-[var(--line)] [&_th]:bg-[#edf6ff] [&_th]:p-3 [&_th]:text-left [&_th]:font-bold [&_th]:text-[var(--blue)] [&_td]:border [&_td]:border-[var(--line)] [&_td]:p-3
         [&_pre]:my-8 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-[#102f50] [&_pre]:p-6 [&_pre]:text-sm [&_pre]:leading-6 [&_pre]:text-white [&_code]:rounded [&_code]:bg-[#edf6ff] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-[15px] [&_code]:text-[var(--blue)] [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-inherit`;
     return <article className="bg-(--sky) pb-24 pt-10.5">
@@ -95,7 +96,7 @@ export default async function ArticlePage({params}: { params: Promise<{ slug: st
                             alt={article.cover?.alternativeText || ""}
                             width={900} height={520} priority/></div>}
                     <VideoEmbed url={article.videoUrl} title={article.videoTitle || article.title}/>
-                    <div className={articleContent} dangerouslySetInnerHTML={{__html: formatQuoteCitations(article.content || "")}}/>
+                    <div className={articleContent}><TiptapContent content={article.content} legacyHtml={formatQuoteCitations(article.content || "")}/></div>
                 </div>
                 <aside
                     className="sticky top-30 grid gap-4.5 max-[1000px]:static max-[1000px]:grid-cols-3 max-[800px]:grid-cols-1">
@@ -118,7 +119,7 @@ export default async function ArticlePage({params}: { params: Promise<{ slug: st
                             href={`/articles/${item.slug}`} key={item.id}>{item.cover?.url &&
                             <Image className="h-12 w-15 shrink-0 object-cover" src={mediaUrl(item.cover.url)} alt="" width={60}
                                    height={48}/>}<span className="flex min-w-0 flex-col gap-1"><small
-                            className="w-fit bg-[#dcecff] px-1.5 py-0.5 text-sm font-extrabold text-[var(--blue)]">{item.resourceType === "temoignage" ? "TÉMOIGNAGE" : "ARTICLE"}</small><span className="text-sm font-semibold leading-[1.35] text-[var(--ink)]">{item.title}</span></span></Link>)}</div>
+                            className="w-fit bg-[#dcecff] px-1.5 py-0.5 text-sm font-extrabold text-[var(--blue)]">{item.resourceType === "temoignage" ? "TÉMOIGNAGE" : "ARTICLE"}</small><span className="text-base font-semibold leading-[1.35] text-[var(--ink)]">{item.title}</span></span></Link>)}</div>
                     </div>}
                     <div className="relative overflow-hidden rounded-[6px] bg-[var(--blue)] p-6 text-white shadow-[0_8px_20px_rgba(18,50,85,.08)]">
                         <Rocket className="pointer-events-none absolute -bottom-5 -right-4 h-24 w-24 text-[#4d7eaf]" strokeWidth={1.5} aria-hidden />
