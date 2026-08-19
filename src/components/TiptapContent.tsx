@@ -60,7 +60,7 @@ function renderNode(node: TiptapNode, key: string): ReactNode {
     const lastNode = quotedNodes.at(-1);
     const author = lastNode?.type === "paragraph" ? nodeText(lastNode).match(/^\s*(?:—|–|-)\s*(.+)$/)?.[1] : undefined;
     const body = author ? quotedNodes.slice(0, -1) : quotedNodes;
-    return <blockquote key={key} data-tiptap-quote="true"><QuoteIcon />{renderChildren(body, key)}{author && <cite>{author}</cite>}</blockquote>;
+    return <blockquote key={key} data-tiptap-quote="true"><QuoteIcon />{renderChildren(body, key)}{author && <cite>— {author}</cite>}</blockquote>;
   }
   if (node.type === "bulletList") return <ul key={key}>{children}</ul>;
   if (node.type === "orderedList") return <ol key={key} start={typeof node.attrs?.start === "number" ? node.attrs.start : undefined}>{children}</ol>;
