@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { PreviewBanner } from "@/components/PreviewBanner";
 import { fallbackSite } from "@/lib/fallback-content";
 import { absoluteUrl, siteUrl } from "@/lib/seo";
 import { getSiteConfig } from "@/lib/strapi";
@@ -60,5 +61,5 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     publisher: { "@type": "Organization", name: config.siteName || "WeSoft" },
   };
   const structuredData = JSON.stringify([organization, website]).replace(/</g, "\\u003c");
-  return <html lang="fr"><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} /><Header config={config}/><main>{children}</main><Footer config={config}/></body></html>;
+  return <html lang="fr"><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} /><Header config={config}/><main>{children}</main><Footer config={config}/><PreviewBanner /></body></html>;
 }

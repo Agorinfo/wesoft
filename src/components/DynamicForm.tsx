@@ -31,18 +31,24 @@ export function DynamicForm({ form, variant = "card" }: DynamicFormProps) {
   const embedded = variant === "embedded";
 
   return (
-    <form className={formClass} onSubmit={submit}>
+    <form
+      className={formClass}
+      onSubmit={submit}
+      toolname="submit_contact_request"
+      tooldescription="Prépare une demande de contact pour WeSoft. L’utilisateur doit confirmer l’envoi du formulaire."
+      aria-busy={status === "sending"}
+    >
       {form.fields?.map((field) => (
         <div className={`flex flex-col gap-2 ${field.width !== "half" ? "col-span-full" : "max-[600px]:col-span-full"}`} key={field.name}>
           {field.type === "checkbox" ? (
             <label className={`flex cursor-pointer items-start gap-3 text-base leading-5 text-[var(--muted)] ${embedded ? "px-0 py-1" : "rounded-md bg-[var(--sky)] px-4 py-3"}`}>
-              <input className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--blue)]" type="checkbox" name={field.name} required={field.required} />
+              <input className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--blue)]" type="checkbox" name={field.name} required={field.required} toolparamdescription={field.helpText || field.label} />
               <span>{field.label}</span>
             </label>
           ) : (
             <>
               <label className="text-base font-bold text-[var(--ink)]" htmlFor={field.name}>{field.label}{field.required ? <span className="text-[var(--blue)]"> *</span> : null}</label>
-              {field.type === "textarea" ? <textarea className={`${inputClass} min-h-36 resize-y`} id={field.name} name={field.name} placeholder={field.placeholder} required={field.required} rows={5} /> : field.type === "select" ? <select className={inputClass} id={field.name} name={field.name} required={field.required}><option value="">{field.placeholder || "Sélectionner"}</option>{field.options?.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select> : <input className={inputClass} id={field.name} name={field.name} type={field.type} placeholder={field.placeholder} required={field.required} />}
+              {field.type === "textarea" ? <textarea className={`${inputClass} min-h-36 resize-y`} id={field.name} name={field.name} placeholder={field.placeholder} required={field.required} rows={5} toolparamdescription={field.helpText || field.label} /> : field.type === "select" ? <select className={inputClass} id={field.name} name={field.name} required={field.required} toolparamdescription={field.helpText || field.label}><option value="">{field.placeholder || "Sélectionner"}</option>{field.options?.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select> : <input className={inputClass} id={field.name} name={field.name} type={field.type} placeholder={field.placeholder} required={field.required} toolparamdescription={field.helpText || field.label} />}
               {field.helpText && <small className="text-xs leading-5 text-[var(--muted)]">{field.helpText}</small>}
             </>
           )}

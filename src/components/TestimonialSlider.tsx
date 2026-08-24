@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Quote } from "lucide-react";
 import { CmsIcon } from "@/components/CmsIcon";
-import { mediaUrl } from "@/lib/strapi";
+import { mediaUrl } from "@/lib/media";
 import type { CmsIconValue, Media, Metric, Testimonial } from "@/types/content";
 import { CONTENT } from "./sections/shared";
 

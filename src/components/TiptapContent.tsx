@@ -1,5 +1,5 @@
 import { createElement, Fragment, type CSSProperties, type ReactNode } from "react";
-import { mediaUrl } from "@/lib/strapi";
+import { mediaUrl } from "@/lib/media";
 
 type TiptapMark = { type?: string; attrs?: Record<string, unknown> };
 type TiptapNode = { type?: string; text?: string; attrs?: Record<string, unknown>; marks?: TiptapMark[]; content?: TiptapNode[] };
@@ -70,7 +70,9 @@ function renderNode(node: TiptapNode, key: string): ReactNode {
   if (node.type === "codeBlock") return <pre key={key}><code>{children}</code></pre>;
   if (node.type === "image") {
     const source = typeof node.attrs?.src === "string" ? node.attrs.src : "";
-    return source ? <img key={key} src={source.startsWith("/") ? mediaUrl(source) : source} alt={typeof node.attrs?.alt === "string" ? node.attrs.alt : ""} width={typeof node.attrs?.width === "number" ? node.attrs.width : undefined} height={typeof node.attrs?.height === "number" ? node.attrs.height : undefined} /> : null;
+    const width = Number(node.attrs?.width) || undefined;
+    const height = Number(node.attrs?.height) || undefined;
+    return source ? <img key={key} src={source.startsWith("/") ? mediaUrl(source) : source} alt={typeof node.attrs?.alt === "string" ? node.attrs.alt : ""} width={width} height={height} loading="lazy" decoding="async" /> : null;
   }
   if (node.type === "table") return <table key={key}><tbody>{children}</tbody></table>;
   if (node.type === "tableRow") return <tr key={key}>{children}</tr>;

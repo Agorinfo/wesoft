@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { mediaUrl } from "@/lib/strapi";
+import { mediaUrl } from "@/lib/media";
 import type { PageBlock, TeamMember } from "@/types/content";
 import { CONTENT, list, sectionClass, SectionHeading, text } from "./shared";
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { CmsButton } from "@/components/CmsButton";
 import { CmsIcon } from "@/components/CmsIcon";
-import { mediaUrl } from "@/lib/strapi";
+import { mediaUrl } from "@/lib/media";
 import type { CmsButton as ButtonData, CmsIconValue, Media, PageBlock } from "@/types/content";
 import { ChartNoAxesCombined } from "lucide-react";
 import { backgroundClass, CONTENT, list, text } from "./shared";

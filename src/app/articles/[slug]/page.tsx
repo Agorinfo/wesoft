@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import {Clock3, Rocket} from "lucide-react";
 import {notFound} from "next/navigation";
-import {getArticle, getArticles, getSiteConfig, mediaUrl} from "@/lib/strapi";
+import {getArticle, getArticles, getSiteConfig} from "@/lib/strapi";
+import {mediaUrl} from "@/lib/media";
 import {CmsButton} from "@/components/CmsButton";
 import {TiptapContent} from "@/components/TiptapContent";
 import {VideoEmbed} from "@/components/VideoEmbed";
@@ -93,7 +94,7 @@ export default async function ArticlePage({params}: { params: Promise<{ slug: st
                     {cover &&
                     <div className="relative mb-9 mt-7"><Image
                             className="w-full rounded-[4px] shadow-[0_10px_28px_rgba(18,50,85,.1)]" src={cover}
-                            alt={article.cover?.alternativeText || ""}
+                            alt={article.cover?.alternativeText || article.title}
                             width={900} height={520} priority/></div>}
                     <VideoEmbed url={article.videoUrl} title={article.videoTitle || article.title}/>
                     <div className={articleContent}><TiptapContent content={article.content} legacyHtml={formatQuoteCitations(article.content || "")}/></div>
@@ -117,7 +118,7 @@ export default async function ArticlePage({params}: { params: Promise<{ slug: st
                         <div className="border-t border-[#dbe3eb]">{related.map((item) => <Link
                             className="flex gap-3 border-b border-[#dbe3eb] py-3 last:border-b-0"
                             href={`/articles/${item.slug}`} key={item.id}>{item.cover?.url &&
-                            <Image className="h-12 w-15 shrink-0 object-cover" src={mediaUrl(item.cover.url)} alt="" width={60}
+                            <Image className="h-12 w-15 shrink-0 object-cover" src={mediaUrl(item.cover.url)} alt={item.cover.alternativeText || item.title} width={60}
                                    height={48}/>}<span className="flex min-w-0 flex-col gap-1"><small
                             className="w-fit bg-[#dcecff] px-1.5 py-0.5 text-sm font-extrabold text-[var(--blue)]">{item.resourceType === "temoignage" ? "TÉMOIGNAGE" : "ARTICLE"}</small><span className="text-base font-semibold leading-[1.35] text-[var(--ink)]">{item.title}</span></span></Link>)}</div>
                     </div>}

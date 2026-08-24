@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { CmsButton } from "@/components/CmsButton";
-import { mediaUrl } from "@/lib/strapi";
+import { mediaUrl } from "@/lib/media";
 import type { CSSProperties } from "react";
 import type { PageBlock, Software } from "@/types/content";
 import { CONTENT, list, sectionClass, SectionHeading, text } from "./shared";
@@ -14,7 +14,7 @@ export function SoftwareShowcaseSection({ block }: { block: PageBlock }) {
           const accent = item.accentColor || "#004288";
           return <article className="grid min-h-70.5 grid-cols-[360px_1fr] border border-(--line) border-t-4 bg-[#fbfbff] max-[1000px]:grid-cols-[280px_1fr] max-[800px]:grid-cols-1" style={{ borderTopColor: accent, "--software-accent": accent } as CSSProperties} key={item.id || item.name || index}>
             <div className="relative min-h-70 bg-[linear-gradient(45deg,#eee_25%,transparent_25%),linear-gradient(-45deg,#eee_25%,transparent_25%),linear-gradient(45deg,transparent_75%,#eee_75%),linear-gradient(-45deg,transparent_75%,#eee_75%)] bg-position-[0_0,0_10px,10px_-10px,-10px_0] bg-size-[20px_20px] max-[800px]:min-h-55">
-              {item.image?.url && <Image className="object-cover" src={mediaUrl(item.image.url)} alt="" fill sizes="30vw" />}
+              {item.image?.url && <Image className="object-cover" src={mediaUrl(item.image.url)} alt={item.image.alternativeText || item.name} fill sizes="30vw" />}
             </div>
             <div className="px-6 py-5.75">
               <div className="flex h-18 items-start justify-between gap-6 max-[600px]:h-auto max-[600px]:flex-col">

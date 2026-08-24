@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {mediaUrl} from "@/lib/strapi";
+import {mediaUrl} from "@/lib/media";
 import type {SiteConfig} from "@/types/content";
 
 export function Brand({config}: { config: SiteConfig }) {

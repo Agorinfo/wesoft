@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import {SectionRenderer} from "@/components/SectionRenderer";
 import {fallbackHome, mergePageWithFallback} from "@/lib/fallback-content";
-import {getPage, mediaUrl} from "@/lib/strapi";
+import {getPage} from "@/lib/strapi";
+import {mediaUrl} from "@/lib/media";
 
 export async function generateMetadata(): Promise<Metadata> {
     const page = mergePageWithFallback(await getPage("accueil"), fallbackHome);

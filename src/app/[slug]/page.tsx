@@ -2,7 +2,8 @@ import type {Metadata} from "next";
 import {notFound, redirect} from "next/navigation";
 import {SectionRenderer} from "@/components/SectionRenderer";
 import {PageBreadcrumb} from "@/components/PageBreadcrumb";
-import {getPage, mediaUrl} from "@/lib/strapi";
+import {getPage} from "@/lib/strapi";
+import {mediaUrl} from "@/lib/media";
 import { fallbackPages, mergePageWithFallback } from "@/lib/fallback-content";
 
 export async function generateMetadata({params}: { params: Promise<{ slug: string }> }): Promise<Metadata> {

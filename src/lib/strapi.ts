@@ -1,4 +1,5 @@
 import type { Article, CmsPage, FormDefinition, SiteConfig } from "@/types/content";
+import { draftMode } from "next/headers";
 
 const STRAPI_URL = (process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337").replace(/\/$/, "");
 
@@ -48,10 +49,15 @@ function resolveStrapiMedia<T>(value: T): T {
 
 async function cmsFetch<T>(path: string, init?: RequestInit): Promise<T | null> {
   try {
-    const response = await fetch(`${STRAPI_URL}${path}`, {
+    const { isEnabled: isDraftMode } = await draftMode();
+    const requestPath = isDraftMode
+      ? `${path}${path.includes("?") ? "&" : "?"}status=draft`
+      : path;
+    const response = await fetch(`${STRAPI_URL}${requestPath}`, {
       ...init,
       headers: { "Content-Type": "application/json", ...(process.env.STRAPI_API_TOKEN ? { Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}` } : {}), ...init?.headers },
-      next: init?.method && init.method !== "GET" ? undefined : { revalidate: 60 },
+      cache: isDraftMode ? "no-store" : init?.cache,
+      next: isDraftMode || (init?.method && init.method !== "GET") ? undefined : { revalidate: 60 },
     });
     if (!response.ok) return null;
     return resolveStrapiMedia((await response.json()) as T);

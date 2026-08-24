@@ -3,7 +3,7 @@ import {notFound} from "next/navigation";
 import {SectionRenderer} from "@/components/SectionRenderer";
 import {PageBreadcrumb} from "@/components/PageBreadcrumb";
 import {getPage} from "@/lib/strapi";
-import { mediaUrl } from "@/lib/strapi";
+import { mediaUrl } from "@/lib/media";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPage("articles");
