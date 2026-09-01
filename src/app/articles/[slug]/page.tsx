@@ -54,12 +54,12 @@ export default async function ArticlePage({params}: { params: Promise<{ slug: st
         ...(article.resourceType === "video" && article.videoUrl ? { contentUrl: article.videoUrl, name: article.videoTitle || article.title } : {}),
     }).replace(/</g, "\\u003c");
     const related = article.relatedArticles?.length ? article.relatedArticles : (await getArticles(4)).filter((item) => item.slug !== article.slug).slice(0, 2);
-    const asideCard = "rounded-[6px] border border-[#dbe3eb] bg-white p-6 shadow-[0_8px_20px_rgba(18,50,85,.04)]";
+    const asideCard = "rounded-[6px] border-2 border-[#dbe3eb] bg-white p-6 shadow-[0_8px_20px_rgba(18,50,85,.04)]";
     const asideCtaCard = `${asideCard} relative overflow-hidden`;
     const articleContent = `max-w-none py-9 text-base leading-[1.65] text-[#343943]
         max-[600px]:py-7
         [&_p]:my-7 [&_p:first-child]:mt-0 [&_p:first-child]:font-[Hanken] [&_p:first-child]:text-base [&_p:first-child]:font-medium [&_p:first-child]:leading-[1.7] [&_p:last-child]:mb-0
-        [&_h2]:mb-5 [&_h2]:mt-14 [&_h2]:font-[Hanken] [&_h2]:text-2xl [&_h2]:font-extrabold [&_h2]:leading-[1.2] [&_h2]:tracking-[-.025em] [&_h2]:text-[var(--blue)] [&_h2:first-child]:mt-0
+        [&_h2]:mb-5 [&_h2]:mt-14 [&_h2]:font-[Hanken] [&_h2]:text-[32px] [&_h2]:font-extrabold [&_h2]:leading-[1.2] [&_h2]:tracking-[-.025em] [&_h2]:text-[var(--blue)] [&_h2]:max-[600px]:text-[28px] [&_h2:first-child]:mt-0
         [&_h3]:mb-4 [&_h3]:mt-9 [&_h3]:font-[Hanken] [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:leading-[1.3] [&_h3]:text-[var(--ink)]
         [&_h4]:mb-3 [&_h4]:mt-8 [&_h4]:font-[Hanken] [&_h4]:text-2xl [&_h4]:font-bold [&_h4]:text-[var(--blue)]
         [&_ul]:my-7 [&_ul]:list-none [&_ul]:space-y-3 [&_ul]:p-0 [&_ul>li]:relative [&_ul>li]:pl-6 [&_ul>li]:leading-[1.75] [&_ul>li]:before:absolute [&_ul>li]:before:left-0 [&_ul>li]:before:top-[.65em] [&_ul>li]:before:h-2 [&_ul>li]:before:w-2 [&_ul>li]:before:rounded-full [&_ul>li]:before:bg-[var(--blue)] [&_ol]:my-7 [&_ol]:list-decimal [&_ol]:space-y-3 [&_ol]:pl-7
@@ -77,7 +77,7 @@ export default async function ArticlePage({params}: { params: Promise<{ slug: st
             className="mx-auto w-[calc(100%-48px)] max-w-298 max-[800px]:w-[calc(100%-32px)] max-[800px]:max-w-170">
             <nav className="mb-9.5 flex items-center gap-2 text-xs text-(--muted)" aria-label="Fil d’Ariane">
                 <Link href="/">Accueil</Link><span>›</span><Link
-                href="/articles">Ressources</Link><span>›</span><strong>{article.title}</strong></nav>
+                href="/articles">Ressources</Link><span>›</span><strong className="font-semibold text-[var(--blue)]">{article.title}</strong></nav>
             <div
                 className="grid grid-cols-[minmax(0,2.25fr)_minmax(270px,1fr)] items-start gap-8 max-[1000px]:grid-cols-1">
                 <div className="min-w-0">

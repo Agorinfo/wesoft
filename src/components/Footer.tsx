@@ -19,7 +19,7 @@ export function Footer({config}: { config: SiteConfig }) {
     return <footer className="border-t border-(--line) pb-7.5 pt-20">
         <div className={`mx-auto grid w-[calc(100%-48px)] max-w-298 grid-cols-1 gap-9.5 sm:grid-cols-2 md:grid-cols-3 ${desktopGrid} max-[800px]:w-[calc(100%-32px)] max-[800px]:max-w-170`}>
             <div className="col-span-full lg:col-span-1"><Brand config={config}/><p className="mt-6 max-w-72.5 leading-[1.6] text-(--muted)">{config.footerIntro}</p>
-                <div className="mt-6 flex gap-4">{config.socialLinks?.map((link, index) => <a className="grid h-10 w-10 place-items-center rounded-xl border border-(--line) transition hover:border-(--blue) hover:text-(--blue)" aria-label={link.label}
+                <div className="mt-6 flex gap-4">{config.socialLinks?.map((link, index) => <a className="grid h-10 w-10 place-items-center rounded-xl border-2 border-(--line) transition hover:border-(--blue) hover:text-(--blue)" aria-label={link.label}
                                                                                              key={link.href}
                                                                                              href={link.href}
                                                                                              target="_blank"

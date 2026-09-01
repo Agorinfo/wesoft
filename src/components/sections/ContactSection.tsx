@@ -53,7 +53,7 @@ export async function ContactSection({ block }: { block: PageBlock }) {
     <section className={`${sectionClass(block)} overflow-hidden`}>
       <div className={`${CONTENT} grid grid-cols-[minmax(280px,.8fr)_minmax(0,1.65fr)] items-start gap-6 max-[1000px]:grid-cols-1 max-[1000px]:gap-8`}>
         <aside className="grid gap-6">
-          <div className="rounded-[7px] border border-[#dbe3eb] bg-white p-6 shadow-[0_8px_20px_rgba(18,50,85,.04)]">
+          <div className="rounded-[7px] border-2 border-[#dbe3eb] bg-white p-6 shadow-[0_8px_20px_rgba(18,50,85,.04)]">
             <div className="flex items-center gap-2 text-[var(--blue)]">
               <span className="grid h-6 w-6 place-items-center">{officeIcon ? <CmsIcon icon={officeIcon} /> : <MapPin size={23} strokeWidth={2.2} />}</span>
               <h2 className="m-0 font-[Hanken] text-2xl font-bold leading-tight text-[var(--ink)]">{officeTitle}</h2>
@@ -62,7 +62,7 @@ export async function ContactSection({ block }: { block: PageBlock }) {
             {text(block.address) && <p className="m-0 whitespace-pre-line text-base leading-6 text-[var(--muted)]">{text(block.address)}</p>}
           </div>
 
-          <div className="rounded-[7px] border border-[#dbe3eb] bg-white p-6 shadow-[0_8px_20px_rgba(18,50,85,.04)]">
+          <div className="rounded-[7px] border-2 border-[#dbe3eb] bg-white p-6 shadow-[0_8px_20px_rgba(18,50,85,.04)]">
             <div className="flex items-center gap-2 text-[var(--blue)]">
               <span className="grid h-6 w-6 place-items-center">{socialIcon ? <CmsIcon icon={socialIcon} /> : <Share2 size={22} strokeWidth={2.2} />}</span>
               <h2 className="m-0 font-[Hanken] text-2xl font-bold leading-tight text-[var(--ink)]">{socialTitle}</h2>
@@ -70,7 +70,7 @@ export async function ContactSection({ block }: { block: PageBlock }) {
             {text(block.socialText) && <p className="mb-5 mt-4 text-base leading-6 text-[var(--muted)]">{text(block.socialText)}</p>}
             {socialHref && (
               <a
-                className="flex min-h-14 items-center gap-3 rounded-[4px] border border-[#dbe3eb] px-3 py-2 text-[var(--ink)] transition hover:border-[var(--blue)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--blue)]"
+                className="flex min-h-14 items-center gap-3 rounded-[4px] border-2 border-[#dbe3eb] px-3 py-2 text-[var(--ink)] transition hover:border-[var(--blue)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--blue)]"
                 href={socialHref}
                 target="_blank"
                 rel="noreferrer"
@@ -86,7 +86,7 @@ export async function ContactSection({ block }: { block: PageBlock }) {
           </div>
         </aside>
 
-        <div className="rounded-[7px] border border-[#dbe3eb] bg-white p-6 shadow-[0_8px_20px_rgba(18,50,85,.04)] max-[700px]:p-5">
+        <div className="rounded-[7px] border-2 border-[#dbe3eb] bg-white p-6 shadow-[0_8px_20px_rgba(18,50,85,.04)] max-[700px]:p-5">
           <h2 className="m-0 font-[Hanken] text-[32px] font-bold leading-[1.15] tracking-[-.025em] max-[600px]:text-2xl">{text(block.title) || form?.title || "Formulaire de contact"}</h2>
           {form?.description && <p className="mb-6 mt-3 max-w-[610px] text-base leading-6 text-[var(--muted)]">{form.description}</p>}
           {form && <DynamicForm form={form} variant="embedded" />}

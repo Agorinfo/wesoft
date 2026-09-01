@@ -72,6 +72,9 @@ function renderNode(node: TiptapNode, key: string): ReactNode {
     const source = typeof node.attrs?.src === "string" ? node.attrs.src : "";
     const width = Number(node.attrs?.width) || undefined;
     const height = Number(node.attrs?.height) || undefined;
+    // The content is authored in Strapi and may carry arbitrary media URLs;
+    // it deliberately bypasses Next's optimizer like the rest of CMS media.
+    // eslint-disable-next-line @next/next/no-img-element
     return source ? <img key={key} src={source.startsWith("/") ? mediaUrl(source) : source} alt={typeof node.attrs?.alt === "string" ? node.attrs.alt : ""} width={width} height={height} loading="lazy" decoding="async" /> : null;
   }
   if (node.type === "table") return <table key={key}><tbody>{children}</tbody></table>;

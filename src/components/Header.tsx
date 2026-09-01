@@ -67,9 +67,7 @@ export function Header({config}: { config: SiteConfig }) {
         return () => { document.body.style.overflow = previousOverflow; };
     }, [open]);
 
-    useEffect(() => { setOpen(false); }, [pathname]);
-
-    const navigationClass = `flex items-center gap-[30px] text-sm font-semibold text-[#424752]
+    const navigationClass = `flex items-center gap-8 text-base font-semibold text-[#424752]
         max-[800px]:fixed max-[800px]:inset-x-4 max-[800px]:top-[88px] max-[800px]:z-20 max-[800px]:flex-col max-[800px]:items-stretch max-[800px]:gap-1 max-[800px]:rounded-[20px] max-[800px]:border max-[800px]:border-white/80 max-[800px]:bg-white/95 max-[800px]:p-3 max-[800px]:shadow-[0_22px_50px_rgba(18,50,85,.18)] max-[800px]:backdrop-blur-xl
         ${open ? "max-[800px]:flex" : "max-[800px]:hidden"}`;
     return <header className="sticky top-0 z-50 h-24 border-b border-gray-200 bg-[#fafaff] max-[800px]:h-[76px]">

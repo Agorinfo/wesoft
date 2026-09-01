@@ -1,5 +1,8 @@
 import "react";
 
+/* The generic element type is required by React's declaration-merging API. */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 /**
  * Experimental, declarative WebMCP attributes. They are ignored by browsers
  * that do not implement WebMCP, so they are a safe progressive enhancement.
